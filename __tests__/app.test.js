@@ -58,5 +58,19 @@ describe('recipe routes', () => {
       });
   });
 
+  it('updates a recipe by id', async () => {
+    const recipe = await Recipe.insert({
+      name: 'chocolate mug cake',
+      ingredients: ['2 Tbsp almond flour', '2 Tbsp protein powder', '2 Tbsp sugar', '1 Tbsp coconut oil', '1 Tbsp cocoa powder', '1 egg', '1/4 tsp baking soda'],
+      directions: 'Mix dry ingredients. Add beaten egg and melted oil. Grease ramekin/mug and fill with an inch of empty space to rise. Microwave on high for 2 minutes.'
+    });
 
+    return request(app)
+      .put(`/api/v1/recipes/${recipe.id}`)
+      .send({
+        name: 'chocolate mug cake',
+        ingredients: ['2 Tbsp almond flour', '2 Tbsp protein powder', '2 Tbsp sugar', '1 Tbsp coconut oil', '1 Tbsp cocoa powder', '1 egg', '1/4 tsp baking soda'],
+        directions: 'Mix dry ingredients. Add beaten egg and melted oil. Grease ramekin/mug and fill with an inch of empty space to rise. Microwave on high for 2 minutes.'
+      });
+  });
 });
